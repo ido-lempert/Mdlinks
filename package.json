@@ -1,0 +1,1 @@
+{ "name": "mdlinks", "version": "0.1.0", "type": "module", "bin": { "mdlinks": "mdlinks.mjs" }, "scripts": { "test": "node test/test.mjs" } }
