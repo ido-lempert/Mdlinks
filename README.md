@@ -13,5 +13,7 @@ It skips web URLs, `#anchors` and fenced code blocks, and exits with code 1 if i
 - It checks that the target file exists. It does not check that a `#heading` anchor exists.
 - Reference-style links (`[text][id]`) are not read.
 
+Malformed percent escapes in relative targets are reported as broken links, not fatal parser errors, so the scan continues to the remaining links.
+
 ## Test
 `npm test`

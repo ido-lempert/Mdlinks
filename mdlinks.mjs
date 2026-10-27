@@ -11,7 +11,9 @@ export function findBroken(file) {
   for (const m of text.matchAll(LINK)) {
     const target = m[1];
     if (/^([a-z][a-z0-9+.-]*:|#|\/\/)/i.test(target)) continue; // URL or in-page anchor
-    const path = decodeURIComponent(target.split('#')[0].split('?')[0]);
+    let path;
+    try { path = decodeURIComponent(target.split('#')[0].split('?')[0]); }
+    catch { broken.push(target); continue; } // malformed URL escapes should not stop the scan
     if (path && !existsSync(resolve(dirname(file), path))) broken.push(target);
   }
   return broken;
