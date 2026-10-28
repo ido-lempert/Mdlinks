@@ -1,0 +1,17 @@
+{
+  "name": "chrome-channel-delta-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "smoke": "node smoke.mjs",
+    "round1": "node harness.mjs",
+    "deep": "node deep-probes.mjs",
+    "loaf": "node loaf-deep.mjs",
+    "draw": "node draw-element2.mjs",
+    "shots": "node shots2.mjs && node shots3.mjs",
+    "errcheck": "node errcheck.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  }
+}

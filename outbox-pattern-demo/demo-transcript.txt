@@ -1,0 +1,26 @@
+=== PHASE A: naive dual-write, crash between DB commit and queue publish ===
+seeded tale-1 as draft
+CRASH: process died after DB commit, before queue publish
+state: {"dbStatus":"published","dashboardStatus":null,"outboxPending":0}
+PASS: divergence reproduced: DB says published, dashboard never heard about it
+
+=== PHASE B: outbox, API crashes AFTER commit; relay drains later ===
+seeded tale-1 as draft
+CRASH: process died right after commit; outbox row is safe
+after API crash: {"dbStatus":"published","dashboardStatus":null,"outboxPending":1}
+PASS: outbox row survived the crash, pending relay
+relayed tale.published for tale tale-1
+consumer applied=1 duplicatesSkipped=0
+after relay+consumer: {"dbStatus":"published","dashboardStatus":"published","outboxPending":0}
+PASS: system converged without any data loss
+
+=== PHASE C: relay dies mid-publish; duplicate delivered; consumer dedupes ===
+seeded tale-1 as draft
+CRASH: relay died after queueing 95765623-a3f6-4cf6-a11e-e96e87b34f27, before marking
+relayed tale.published for tale tale-1
+consumer: consumer applied=1 duplicatesSkipped=1
+PASS: duplicate delivery skipped by idempotency ledger
+final: {"dbStatus":"published","dashboardStatus":"published","outboxPending":0}
+PASS: dashboard correct despite duplicate
+
+ALL PHASES PASS

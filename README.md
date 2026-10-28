@@ -17,3 +17,10 @@ Malformed percent escapes in relative targets are reported as broken links, not 
 
 ## Test
 `npm test`
+
+## Article proof-of-concept labs
+
+This repo also hosts runnable companions to technical articles. Each lab lives in its own folder with its own README:
+
+- `chrome-channel-delta-lab/` - measured deltas for five browser features across Chrome 156-158 builds (Playwright harness, probe scripts, results JSONs, figures).
+- `outbox-pattern-demo/` - transactional outbox pattern: three crash scenarios on node:sqlite, five assertions (`./run-demo.sh`, Node 22).
