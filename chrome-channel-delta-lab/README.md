@@ -34,7 +34,8 @@ here are the runtime.
   pseudo-aware `getComputedStyle`, two-value text-overflow syntax,
   textPath lengths/rotations.
 - `npm run loaf` - long-animation-frame entries captured under a heavy
-  forced style/layout workload, full `toJSON()` key dumps.
+  forced style/layout workload, full `toJSON()` key dumps. Writes a
+  timestamped JSON under `research/` (not committed at top level).
 - `npm run draw` - minimal verified `drawElementImage` example
   (canvas `content="drawable"` + child `drawable` attribute), pixel-verified.
 - `npm run shots` - visual before/after screenshots
@@ -46,7 +47,12 @@ here are the runtime.
 
 Raw outputs from the author's runs: results-round1.json (five builds
 incl. the Playwright bundled-chromium control), results-deep.json,
-results-errcheck.json, results-cascade.json.
+results-errcheck.json, results-cascade.json. LoAF probe output is
+per-run under `research/`; the article's quoted 150-170ms
+`forcedStyleDuration` range comes from the author's October 28 loaf
+runs and is a noisy single-machine figure. The reviewer's independent
+loaf reruns are archived in senior-evidence (rerun-loaf.log,
+rerun-loaf-all-run2.log).
 
 Provenance: results-*.json are the author's measurements. senior-evidence/
 is NOT author output - it archives an independent reviewer's rerun logs
@@ -85,8 +91,9 @@ level are the author's October 28, 2026 runs.
 | `::highlight(*)` universal selector | rule dropped | rule dropped | parses, cascade verified |
 | SVG textPath `side="right"` | ignored | ignored | reverses text direction along the path |
 
-Columns are prerelease builds (beta / dev / canary); presence there is
-not a stable-shipping claim.
+The beta / dev / canary columns are prerelease builds; presence there
+is not a stable-shipping claim. The 156 stable column is branded Chrome,
+the other builds are Chrome for Testing plus the Playwright control.
 
 Note: the chromestatus M157 roadmap groups the LoAF fields under its
 "Enabled by default" bucket (the planned shipping mode for the milestone),
@@ -97,7 +104,7 @@ still ship them. The reason (later 157 build, off-by-one listing, staged
 rollout) is not asserted - only the runtime evidence is.
 
 Two-value `text-overflow` (`"L" "R"`) is NOT supported in any tested
-build; only the single-string form shipped.
+build; only the single-string form is supported in any tested build.
 
 Feature entries: chromestatus.com/feature/6294595288825856,
 5172548013916160, 5171478175809536, 5174965228929024, 5422782593761280.
