@@ -1,0 +1,10 @@
+== beta-157 157.0.8103.15 | entries: 2
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,scripts
+  styleDuration: undefined | layoutDuration: undefined | styleAndLayoutStart: 529.3000000000175 | scripts[0].forcedStyleDuration: undefined | scripts[0].forcedStyleAndLayoutDuration: 158.8
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,scripts
+  styleDuration: undefined | layoutDuration: undefined | styleAndLayoutStart: 787.1000000000058 | scripts[0].forcedStyleDuration: undefined | scripts[0].forcedStyleAndLayoutDuration: 165.1
+== canary-158 158.0.8127.2 | entries: 2
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,styleDuration,layoutDuration,scripts
+  styleDuration: 0 | layoutDuration: 0 | styleAndLayoutStart: 488.1000000000058 | scripts[0].forcedStyleDuration: 162.1 | scripts[0].forcedStyleAndLayoutDuration: 166.8
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,styleDuration,layoutDuration,scripts
+  styleDuration: 0 | layoutDuration: 0 | styleAndLayoutStart: 746.1000000000058 | scripts[0].forcedStyleDuration: 162.4 | scripts[0].forcedStyleAndLayoutDuration: 162.4

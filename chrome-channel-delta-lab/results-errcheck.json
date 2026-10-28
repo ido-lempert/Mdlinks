@@ -1,0 +1,14 @@
+{
+  "beta-157": {
+    "version": "157.0.8103.15",
+    "case1_noContentAttr": "InvalidStateError: Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': DrawElementImage requires the canvas to have the content=drawable attribute.",
+    "case2_noDrawableAttr": "InvalidStateError: Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': Descendants passed to DrawElementImage must have the 'drawable' attribute.",
+    "case3_control": "InvalidStateError: Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': No cached paint record for element."
+  },
+  "stable-156": {
+    "version": "156.0.8078.47",
+    "case1_noContentAttr": "TypeError: c1.getContext(...).drawElementImage is not a function",
+    "case2_noDrawableAttr": "TypeError: c2.getContext(...).drawElementImage is not a function",
+    "case3_control": "TypeError: c3.getContext(...).drawElementImage is not a function"
+  }
+}

@@ -1,0 +1,15 @@
+== stable-156 156.0.8078.47 | entries: 2
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,scripts
+  styleDuration: undefined | layoutDuration: undefined | styleAndLayoutStart: 621.7000000000116 | scripts[0].forcedStyleDuration: undefined | scripts[0].forcedStyleAndLayoutDuration: 161.7
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,scripts
+  styleDuration: undefined | layoutDuration: undefined | styleAndLayoutStart: 885.6000000000349 | scripts[0].forcedStyleDuration: undefined | scripts[0].forcedStyleAndLayoutDuration: 167.3
+== dev-158 158.0.8117.2 | entries: 2
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,styleDuration,layoutDuration,scripts
+  styleDuration: 0 | layoutDuration: 0 | styleAndLayoutStart: 496.4000000000233 | scripts[0].forcedStyleDuration: 168.8 | scripts[0].forcedStyleAndLayoutDuration: 175.1
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,styleDuration,layoutDuration,scripts
+  styleDuration: 0 | layoutDuration: 0 | styleAndLayoutStart: 752.2999999999884 | scripts[0].forcedStyleDuration: 168.8 | scripts[0].forcedStyleAndLayoutDuration: 168.8
+== canary-158 158.0.8127.2 | entries: 2
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,styleDuration,layoutDuration,scripts
+  styleDuration: 0 | layoutDuration: 0 | styleAndLayoutStart: 527.5999999999767 | scripts[0].forcedStyleDuration: 150.3 | scripts[0].forcedStyleAndLayoutDuration: 157.3
+  keys: name,entryType,startTime,duration,navigationId,paintTime,presentationTime,renderStart,styleAndLayoutStart,firstUIEventTimestamp,blockingDuration,styleDuration,layoutDuration,scripts
+  styleDuration: 0 | layoutDuration: 0 | styleAndLayoutStart: 783.5 | scripts[0].forcedStyleDuration: 165.3 | scripts[0].forcedStyleAndLayoutDuration: 165.3

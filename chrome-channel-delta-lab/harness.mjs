@@ -3,6 +3,7 @@ import fs from 'node:fs';
 
 const BROWSERS = [
   ['stable-156', { channel: 'chrome' }],
+  ['bundled-156', {}],
   ['beta-157', { executablePath: 'browsers/157.0.8103.15/chrome-linux64/chrome' }],
   ['dev-158', { executablePath: 'browsers/158.0.8117.2/chrome-linux64/chrome' }],
   ['canary-158', { executablePath: 'browsers/158.0.8127.2/chrome-linux64/chrome' }],
@@ -93,7 +94,7 @@ const PROBES = {
         leftStart: [posL.x, posL.y], rightStart: [posR.x, posR.y],
         leftEnd: [endL.x, endL.y], rightEnd: [endR.x, endR.y],
         identical: posL.x === posR.x && posL.y === posR.y && endL.x === endR.x && endL.y === endR.y,
-        reflected: tpR.getAttribute('side') === 'right',
+        attributeReadsBack: tpR.getAttribute('side') === 'right',  // attribute round-trip only, NOT support proof
       };
     });
   },

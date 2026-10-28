@@ -1,0 +1,304 @@
+{
+  "stable-156": {
+    "version": "156.0.8078.47",
+    "textOverflow": {
+      "supportsString": false,
+      "computed": "clip",
+      "boxText": 120
+    },
+    "htmlInCanvas": {
+      "ctxPropCount": 74,
+      "elementish": [],
+      "hasDrawElement": false
+    },
+    "loaf": {
+      "supported": true,
+      "entryKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "paintTime",
+        "presentationTime",
+        "renderStart",
+        "styleAndLayoutStart",
+        "firstUIEventTimestamp",
+        "blockingDuration",
+        "scripts"
+      ],
+      "scriptKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "invoker",
+        "invokerType",
+        "windowAttribution",
+        "executionStart",
+        "forcedStyleAndLayoutDuration",
+        "pauseDuration",
+        "sourceURL",
+        "sourceFunctionName",
+        "sourceCharPosition"
+      ],
+      "styleDurationSeen": false
+    },
+    "highlight": {
+      "supportsSelector": false,
+      "parsesInSheet": false,
+      "highlightApi": true
+    },
+    "textPathSide": {
+      "leftStart": [
+        49.957889556884766,
+        150.0441131591797
+      ],
+      "rightStart": [
+        49.957889556884766,
+        150.0441131591797
+      ],
+      "leftEnd": [
+        50.12423324584961,
+        142.9366912841797
+      ],
+      "rightEnd": [
+        50.12423324584961,
+        142.9366912841797
+      ],
+      "identical": true,
+      "reflected": true
+    }
+  },
+  "beta-157": {
+    "version": "157.0.8103.15",
+    "textOverflow": {
+      "supportsString": true,
+      "computed": "\" [more]\"",
+      "boxText": 120
+    },
+    "htmlInCanvas": {
+      "ctxPropCount": 75,
+      "elementish": [
+        "drawElementImage"
+      ],
+      "hasDrawElement": true
+    },
+    "loaf": {
+      "supported": true,
+      "entryKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "paintTime",
+        "presentationTime",
+        "renderStart",
+        "styleAndLayoutStart",
+        "firstUIEventTimestamp",
+        "blockingDuration",
+        "scripts"
+      ],
+      "scriptKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "invoker",
+        "invokerType",
+        "windowAttribution",
+        "executionStart",
+        "forcedStyleAndLayoutDuration",
+        "pauseDuration",
+        "sourceURL",
+        "sourceFunctionName",
+        "sourceCharPosition"
+      ],
+      "styleDurationSeen": false
+    },
+    "highlight": {
+      "supportsSelector": false,
+      "parsesInSheet": false,
+      "highlightApi": true
+    },
+    "textPathSide": {
+      "leftStart": [
+        49.957889556884766,
+        150.0441131591797
+      ],
+      "rightStart": [
+        49.957889556884766,
+        150.0441131591797
+      ],
+      "leftEnd": [
+        50.12423324584961,
+        142.9366912841797
+      ],
+      "rightEnd": [
+        50.12423324584961,
+        142.9366912841797
+      ],
+      "identical": true,
+      "reflected": true
+    }
+  },
+  "dev-158": {
+    "version": "158.0.8117.2",
+    "textOverflow": {
+      "supportsString": true,
+      "computed": "\" [more]\"",
+      "boxText": 120
+    },
+    "htmlInCanvas": {
+      "ctxPropCount": 75,
+      "elementish": [
+        "drawElementImage"
+      ],
+      "hasDrawElement": true
+    },
+    "loaf": {
+      "supported": true,
+      "entryKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "paintTime",
+        "presentationTime",
+        "renderStart",
+        "styleAndLayoutStart",
+        "firstUIEventTimestamp",
+        "blockingDuration",
+        "styleDuration",
+        "layoutDuration",
+        "scripts"
+      ],
+      "scriptKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "invoker",
+        "invokerType",
+        "windowAttribution",
+        "executionStart",
+        "forcedStyleAndLayoutDuration",
+        "forcedStyleDuration",
+        "forcedLayoutDuration",
+        "pauseDuration",
+        "sourceURL",
+        "sourceFunctionName",
+        "sourceCharPosition"
+      ],
+      "styleDurationSeen": true
+    },
+    "highlight": {
+      "supportsSelector": true,
+      "parsesInSheet": true,
+      "highlightApi": true
+    },
+    "textPathSide": {
+      "leftStart": [
+        49.957889556884766,
+        150.0441131591797
+      ],
+      "rightStart": [
+        350.0420837402344,
+        150.0441131591797
+      ],
+      "leftEnd": [
+        50.12423324584961,
+        142.9366912841797
+      ],
+      "rightEnd": [
+        349.8757629394531,
+        142.9366912841797
+      ],
+      "identical": false,
+      "reflected": true
+    }
+  },
+  "canary-158": {
+    "version": "158.0.8127.2",
+    "textOverflow": {
+      "supportsString": true,
+      "computed": "\" [more]\"",
+      "boxText": 120
+    },
+    "htmlInCanvas": {
+      "ctxPropCount": 75,
+      "elementish": [
+        "drawElementImage"
+      ],
+      "hasDrawElement": true
+    },
+    "loaf": {
+      "supported": true,
+      "entryKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "paintTime",
+        "presentationTime",
+        "renderStart",
+        "styleAndLayoutStart",
+        "firstUIEventTimestamp",
+        "blockingDuration",
+        "styleDuration",
+        "layoutDuration",
+        "scripts"
+      ],
+      "scriptKeys": [
+        "name",
+        "entryType",
+        "startTime",
+        "duration",
+        "navigationId",
+        "invoker",
+        "invokerType",
+        "windowAttribution",
+        "executionStart",
+        "forcedStyleAndLayoutDuration",
+        "forcedStyleDuration",
+        "forcedLayoutDuration",
+        "pauseDuration",
+        "sourceURL",
+        "sourceFunctionName",
+        "sourceCharPosition"
+      ],
+      "styleDurationSeen": true
+    },
+    "highlight": {
+      "supportsSelector": true,
+      "parsesInSheet": true,
+      "highlightApi": true
+    },
+    "textPathSide": {
+      "leftStart": [
+        49.957889556884766,
+        150.0441131591797
+      ],
+      "rightStart": [
+        350.0420837402344,
+        150.0441131591797
+      ],
+      "leftEnd": [
+        50.12423324584961,
+        142.9366912841797
+      ],
+      "rightEnd": [
+        349.8757629394531,
+        142.9366912841797
+      ],
+      "identical": false,
+      "reflected": true
+    }
+  }
+}

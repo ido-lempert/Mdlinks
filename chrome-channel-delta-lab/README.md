@@ -39,6 +39,15 @@ here are the runtime.
   (canvas `content="drawable"` + child `drawable` attribute), pixel-verified.
 - `npm run shots` - visual before/after screenshots
   (fig-*.png committed here; shots2.mjs for text-overflow, shots3.mjs for textPath).
+- `npm run errcheck` - captures the verbatim `drawElementImage`
+  exception messages on beta 157 (results-errcheck.json).
+- `npm run cascade` - verifies the `::highlight(*)` cascade in both
+  source orders on canary 158 (results-cascade.json).
+
+Raw outputs: results-round1.json (five builds incl. the Playwright
+bundled-chromium control), results-deep.json, results-errcheck.json,
+results-cascade.json. Independent-rerun outputs and live chromestatus
+snapshots from the review pass are under senior-evidence/.
 
 ## Headline findings (Oct 28, 2026)
 

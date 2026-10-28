@@ -2,6 +2,7 @@ import { chromium } from 'playwright';
 import fs from 'node:fs';
 const BROWSERS = [
   ['stable-156', { channel: 'chrome' }],
+  ['bundled-156', {}],
   ['beta-157', { executablePath: 'browsers/157.0.8103.15/chrome-linux64/chrome' }],
   ['dev-158', { executablePath: 'browsers/158.0.8117.2/chrome-linux64/chrome' }],
   ['canary-158', { executablePath: 'browsers/158.0.8127.2/chrome-linux64/chrome' }],
@@ -57,11 +58,12 @@ for (const [name, opts] of BROWSERS) {
   r.textPathDeep = await page.evaluate(() => {
     const L = document.getElementById('L').parentNode, R = document.getElementById('R').parentNode;
     const g = (t, i, f) => { try { return Math.round(t[f](i) * 100) / 100; } catch (e) { return 'threw'; } };
+    const p = (t, i) => { try { const pt = t.getStartPositionOfChar(i); return { x: Math.round(pt.x * 100) / 100, y: Math.round(pt.y * 100) / 100 }; } catch (e) { return 'threw'; } };
     return {
       lenLeft: Math.round(L.getComputedTextLength() * 100) / 100,
       lenRight: Math.round(R.getComputedTextLength() * 100) / 100,
       rotLeft0: g(L, 0, 'getRotationOfChar'), rotRight0: g(R, 0, 'getRotationOfChar'),
-      startLeft: g(L, 0, 'getStartPositionOfChar') , startRight: g(R, 0, 'getStartPositionOfChar'),
+      startLeft: p(L, 0), startRight: p(R, 0),
     };
   });
 

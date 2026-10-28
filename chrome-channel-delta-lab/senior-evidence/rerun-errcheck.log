@@ -1,0 +1,4 @@
+{
+ "noContent": "Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': DrawElementImage requires the canvas to have the content=drawable attribute.",
+ "noDrawable": "Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': Descendants passed to DrawElementImage must have the 'drawable' attribute."
+}

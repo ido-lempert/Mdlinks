@@ -1,0 +1,108 @@
+stable-156 done
+beta-157 done
+dev-158 done
+canary-158 done
+{
+  "stable-156": {
+    "version": "156.0.8078.47",
+    "drawElement": {
+      "present": false
+    },
+    "highlightCascade": {
+      "rulesParsed": 1,
+      "starComputed": "rgba(0, 0, 0, 0)",
+      "namedComputed": "rgb(0, 0, 255)",
+      "viaStar": ""
+    },
+    "textOverflow2": {
+      "twoStrings": false,
+      "stringEllipsis": false
+    },
+    "textPathDeep": {
+      "lenLeft": 96.16,
+      "lenRight": 96.16,
+      "rotLeft0": -87.05,
+      "rotRight0": -87.05,
+      "startLeft": null,
+      "startRight": null
+    }
+  },
+  "beta-157": {
+    "version": "157.0.8103.15",
+    "drawElement": {
+      "present": true,
+      "arity": 3,
+      "error": "InvalidStateError: Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': DrawElementImage requires the canvas to have the con"
+    },
+    "highlightCascade": {
+      "rulesParsed": 1,
+      "starComputed": "rgba(0, 0, 0, 0)",
+      "namedComputed": "rgb(0, 0, 255)",
+      "viaStar": ""
+    },
+    "textOverflow2": {
+      "twoStrings": false,
+      "stringEllipsis": false
+    },
+    "textPathDeep": {
+      "lenLeft": 96.16,
+      "lenRight": 96.16,
+      "rotLeft0": -87.05,
+      "rotRight0": -87.05,
+      "startLeft": null,
+      "startRight": null
+    }
+  },
+  "dev-158": {
+    "version": "158.0.8117.2",
+    "drawElement": {
+      "present": true,
+      "arity": 3,
+      "error": "InvalidStateError: Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': DrawElementImage requires the canvas to have the con"
+    },
+    "highlightCascade": {
+      "rulesParsed": 2,
+      "starComputed": "rgb(255, 255, 0)",
+      "namedComputed": "rgb(0, 0, 255)",
+      "viaStar": "rgb(255, 255, 0)"
+    },
+    "textOverflow2": {
+      "twoStrings": false,
+      "stringEllipsis": false
+    },
+    "textPathDeep": {
+      "lenLeft": 96.16,
+      "lenRight": 96.16,
+      "rotLeft0": -87.05,
+      "rotRight0": 267.05,
+      "startLeft": null,
+      "startRight": null
+    }
+  },
+  "canary-158": {
+    "version": "158.0.8127.2",
+    "drawElement": {
+      "present": true,
+      "arity": 3,
+      "error": "InvalidStateError: Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D': DrawElementImage requires the canvas to have the con"
+    },
+    "highlightCascade": {
+      "rulesParsed": 2,
+      "starComputed": "rgb(255, 255, 0)",
+      "namedComputed": "rgb(0, 0, 255)",
+      "viaStar": "rgb(255, 255, 0)"
+    },
+    "textOverflow2": {
+      "twoStrings": false,
+      "stringEllipsis": false
+    },
+    "textPathDeep": {
+      "lenLeft": 96.16,
+      "lenRight": 96.16,
+      "rotLeft0": -87.05,
+      "rotRight0": 267.05,
+      "startLeft": null,
+      "startRight": null
+    }
+  }
+}
