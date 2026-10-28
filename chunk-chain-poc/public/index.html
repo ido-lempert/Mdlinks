@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chunk-chain studio - publish a file as chained text posts</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <h1>Publish without a server*</h1>
+  <p class="sub">Split a file into text chunks, post them as a chain, share the first link. Anyone with the link rebuilds the file in their browser. *This demo posts to a LOCAL simulated text relay standing in for a real permitted destination - no external site is touched.</p>
+
+  <section>
+    <h2>1. Publish a file as a chain</h2>
+    <input type="file" id="fileInput">
+    <button id="demoBtn">Generate 50MB demo content</button>
+    <label class="check">Replicas per chunk: <input type="number" id="replicas" value="2" min="1" max="3" style="width:3em"></label>
+    <button id="pubBtn">Split and publish chain</button>
+    <div class="bar"><div id="pubFill"></div></div>
+    <div id="pubStatus" class="status"></div>
+    <div id="linkRow" class="hidden">
+      <label>Start-of-chain link (share this):</label>
+      <input type="text" id="linkOut" readonly>
+      <button id="copyBtn">Copy</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Rebuild from the link</h2>
+    <input type="text" id="linkIn" placeholder="Paste the start-of-chain link here">
+    <button id="startBtn">Rebuild and download</button>
+    <label class="check"><input type="checkbox" id="chaos"> Kill 5 random single replicas first (fault injection)</label>
+    <div class="bar"><div id="dlFill"></div></div>
+    <div id="dlStatus" class="status"></div>
+  </section>
+
+  <footer>POC - controlled environment only. Real destinations need verified permission; no public portal is used here.</footer>
+</main>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
