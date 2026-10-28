@@ -14,14 +14,25 @@
 <p>One caveat up front: this is a point-in-time snapshot (October 28, 2026). Beta and dev builds move weekly, so rerun the harness before quoting numbers.</p>
 <h2>1. text-overflow finally takes a custom string (M157)</h2>
 <p>CSS Overflow 4 lets you replace the ellipsis with any string: <code>text-overflow: " [more]"</code>. The quotes are required, and note the string starts with a space - that space is what separates the marker from the clipped text. The probe sets it on a clipped line and reads the computed style:</p>
-<pre><code class="language-js">CSS.supports('text-overflow', '" [more]"')<br>getComputedStyle(el).textOverflow</code></pre>
+<pre>CSS.supports('text-overflow', '" [more]"')
+getComputedStyle(el).textOverflow</pre>
 <p>On 156 the declaration is dropped and the computed value falls back to <code>clip</code>. On 157 and both 158 builds the computed value is <code>" [more]"</code> and the custom string renders in place of the clipped text (screenshots in the repo: hard clip on 156, " [more]" on canary). One limit worth knowing before you restyle every table cell: the two-value form from the spec, <code>text-overflow: "L" "R"</code> for start and end edges, is rejected by <code>CSS.supports</code> in every build I tested, including canary. Single string only, for now.</p>
 <figure><img src="fig-textoverflow-stable-156.png" alt="Chrome 156 stable: the line is hard-clipped at the box edge, no ellipsis, no custom string"><img src="fig-textoverflow-canary-158.png" alt="Chrome 158 canary: the clipped line ends with the custom string &#34; [more]&#34;"><figcaption>Same page, two builds: hard clip on stable 156, " [more]" on canary 158. The screenshots are illustrative; the quantitative probe read computed styles, not pixels.</figcaption></figure>
 <h2>2. HTML-in-canvas is real, and the runtime teaches you the contract (M157)</h2>
 <p><code>CanvasRenderingContext2D</code> grows one method between 156 and 157: <code>drawElementImage</code>, found by diffing the prototype's property names across builds rather than trusting a blog post. Calling it naively throws, and the exception messages walk you to the working setup. Verified verbatim on the 157 beta:</p>
-<pre><code class="language-">Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D':<br>  DrawElementImage requires the canvas to have the content=drawable attribute.<br>Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D':<br>  Descendants passed to DrawElementImage must have the 'drawable' attribute.</code></pre>
+<pre>Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D':
+  DrawElementImage requires the canvas to have the content=drawable attribute.
+Failed to execute 'drawElementImage' on 'CanvasRenderingContext2D':
+  Descendants passed to DrawElementImage must have the 'drawable' attribute.</pre>
 <p>The minimal verified example, pixel-checked on both 157 and 158:</p>
-<pre><code class="language-html">&lt;canvas id="c" width="120" height="60" content="drawable"&gt;<br>  &lt;div id="src" drawable style="background:#f00;width:60px;height:30px"&gt;hi&lt;/div&gt;<br>&lt;/canvas&gt;<br>&lt;script type="module"&gt;<br>  const ctx = document.getElementById('c').getContext('2d');<br>  await ctx.drawElementImage(document.getElementById('src'), 5, 5);<br>  // getImageData(10,10) now reads [255, 0, 0, 255]<br>&lt;/script&gt;</code></pre>
+<pre>&lt;canvas id="c" width="120" height="60" content="drawable"&gt;
+  &lt;div id="src" drawable style="background:#f00;width:60px;height:30px"&gt;hi&lt;/div&gt;
+&lt;/canvas&gt;
+&lt;script type="module"&gt;
+  const ctx = document.getElementById('c').getContext('2d');
+  await ctx.drawElementImage(document.getElementById('src'), 5, 5);
+  // getImageData(10,10) now reads [255, 0, 0, 255]
+&lt;/script&gt;</pre>
 <p>Drawing actual DOM into a canvas, with layout handled by the browser, opens the door to canvas-based editors and export flows that today need foreignObject hacks. This probe only proves the render path works. Layout synchronization, events and canvas tainting are deeper tests I have not run yet.</p>
 <h2>3. The discrepancy: Long Animation Frames style/layout fields (scheduled for M157, absent from the tested 157 beta)</h2>
 <p>The Long Animation Frames API is how you attribute jank to specific scripts. A dashboard entry scheduled for milestone 157 adds <code>styleDuration</code> and <code>layoutDuration</code> to frame entries and <code>forcedStyleDuration</code> to script entries, so you can tell expensive style recalculation apart from long JavaScript.</p>
@@ -30,7 +41,16 @@
 <p>Why is a feature the roadmap groups under "Enabled by default" for 157 missing from the tested 157 beta? I do not know, and I will not guess in print. The detail page still reads status Proposed, unreleased, desktop milestone 157, rollout plan "will ship" - future tense, and it was last updated October 16 with no Finch rollout link. The roadmap describes a future shipping plan, while the detail page still marks the feature Proposed and unreleased; neither statement establishes that this beta should already contain the fields, and a later 157 build may still add them. What is verified: as of October 28, the tested beta 157.0.8103.15 fires real LoAF entries, but none of them carry the new fields; the entries from the current dev and canary 158 builds do. If you are building on them, detect the field on real entries, not the milestone on a dashboard.</p>
 <h2>4. ::highlight(*) styles every custom highlight at once (M158)</h2>
 <p>Custom highlights (the <code>Highlight</code>/<code>CSS.highlights</code> API) previously had to be styled one name at a time. The universal selector <code>::highlight(*)</code> matches all of them, with zero specificity, as a base layer that named rules override. The cascade claim is measurable, so I measured it with pseudo-aware <code>getComputedStyle</code>:</p>
-<pre><code class="language-js">// register two highlights first, or there is nothing to style<br>const base = new Highlight(rangeOne), named = new Highlight(rangeTwo);<br>CSS.highlights.set('base', base);<br>CSS.highlights.set('named', named);<br>sheet.replaceSync(`<br>  ::highlight(*) { background-color: rgb(255, 255, 0); }<br>  ::highlight(named) { background-color: rgb(0, 0, 255); }<br>`);<br>getComputedStyle(elOne, '::highlight(base)').backgroundColor   // yellow on 158<br>getComputedStyle(elTwo, '::highlight(named)').backgroundColor  // blue on 158</code></pre>
+<pre>// register two highlights first, or there is nothing to style
+const base = new Highlight(rangeOne), named = new Highlight(rangeTwo);
+CSS.highlights.set('base', base);
+CSS.highlights.set('named', named);
+sheet.replaceSync(`
+  ::highlight(*) { background-color: rgb(255, 255, 0); }
+  ::highlight(named) { background-color: rgb(0, 0, 255); }
+`);
+getComputedStyle(elOne, '::highlight(base)').backgroundColor   // yellow on 158
+getComputedStyle(elTwo, '::highlight(named)').backgroundColor  // blue on 158</pre>
 <p>On 156 and 157 the <code>::highlight(*)</code> rule is silently dropped at parse time (the sheet keeps 1 rule instead of 2) and the base style never applies; the named rule still works. On 158 the base is yellow and the named override is blue in both source orders - the named rule wins on specificity, not on rule order, exactly as specified. Silent rule dropping is worth remembering: your stylesheet will not tell you it lost the rule.</p>
 <h2>5. SVG textPath side="right" runs text along the other side of the path (M158)</h2>
 <p>The <code>side</code> attribute lets text follow the other side of a path without rewriting the path data. The probe draws the same text on the same arc with <code>side="left"</code> and <code>side="right"</code> and reads glyph metrics. On 156 and 157 the attribute is ignored: both texts render identically, overlapping at the left end of the arc (the screenshot looks like a printing accident). On 158 the right-side text runs in the opposite direction, from the other end of the arc. The measured numbers: <code>getRotationOfChar(0)</code> reads -87.05 degrees for the left-side text and 267.05 for the right-side text, while <code>getComputedTextLength()</code> stays identical at 96.16 - same text, same length, opposite side. One provenance note: the screenshots use different literal strings for left and right so you can tell them apart at a glance, so treat them as illustrative; the quantitative probe drew identical strings on both sides.</p>
