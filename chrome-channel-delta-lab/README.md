@@ -34,8 +34,10 @@ here are the runtime.
   pseudo-aware `getComputedStyle`, two-value text-overflow syntax,
   textPath lengths/rotations.
 - `npm run loaf` - long-animation-frame entries captured under a heavy
-  forced style/layout workload, full `toJSON()` key dumps. Writes a
-  timestamped JSON under `research/` (not committed at top level).
+  forced style/layout workload, on beta 157 and canary 158 only. Prints
+  entry counts and `toJSON()` keys/fields to stdout; it writes no file.
+  Capture with a shell redirect, e.g.
+  `npm run loaf | tee research/loaf-$(date +%s).log`.
 - `npm run draw` - minimal verified `drawElementImage` example
   (canvas `content="drawable"` + child `drawable` attribute), pixel-verified.
 - `npm run shots` - visual before/after screenshots
@@ -47,11 +49,11 @@ here are the runtime.
 
 Raw outputs from the author's runs: results-round1.json (five builds
 incl. the Playwright bundled-chromium control), results-deep.json,
-results-errcheck.json, results-cascade.json. LoAF probe output is
-per-run under `research/`; the article's quoted 150-170ms
-`forcedStyleDuration` range comes from the author's October 28 loaf
-runs and is a noisy single-machine figure. The reviewer's independent
-loaf reruns are archived in senior-evidence (rerun-loaf.log,
+results-errcheck.json, results-cascade.json. The LoAF probe prints to stdout only; the article's quoted
+150-170ms `forcedStyleDuration` range comes from the author's
+shell-captured October 28 loaf runs and is a noisy single-machine
+figure. The reviewer's independent loaf reruns across all builds are
+archived separately in senior-evidence (rerun-loaf.log,
 rerun-loaf-all-run2.log).
 
 Provenance: results-*.json are the author's measurements. senior-evidence/
