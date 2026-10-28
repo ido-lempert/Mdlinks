@@ -9,8 +9,9 @@ Honest shortcuts, also disclosed in the article: the "queue" is an events table 
 SQLite file - a zero-dependency stand-in broker. The crash windows are the processes
 self-terminating at injected points via process.exit(1) - abrupt, but not an externally
 delivered SIGKILL or power loss. Concurrent access relies on PRAGMA busy_timeout = 5000,
-a finite wait that covers this demo's contention, not a general guarantee. Frameable, the company in the article, is fictional; the failure
-mode is a composite, not a report about a real product or incident.
+a finite wait that covers this demo's contention, not a general guarantee. Frameable, the company in the article, is fictional and the outage story is
+invented; the dual-write failure mode it illustrates is real and well documented.
+It is not a report about any real product, customer, or incident.
 
 ## Run
 

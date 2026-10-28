@@ -9,6 +9,7 @@ PASS: divergence reproduced: DB says published, dashboard never heard about it
 === PHASE B: outbox, API crashes AFTER commit; relay drains later ===
 seeded tale-1 as draft
 CRASH: process died right after commit; outbox row is safe
+  (API exited 1 at the injected crash point, as designed)
 after API crash: {"dbStatus":"published","dashboardStatus":null,"appliedCount":null,"outboxPending":1}
 PASS: outbox row survived the crash, pending relay
 relayed tale.published for tale tale-1
@@ -18,7 +19,8 @@ PASS: system converged without any data loss
 
 === PHASE C: relay dies mid-publish; duplicate delivered; consumer dedupes ===
 seeded tale-1 as draft
-CRASH: relay died after queueing 99bd3935-d3ee-4b5c-a77f-c5fb5447103f, before marking
+CRASH: relay died after queueing c4aea506-b8e6-448f-b431-5014176b121d, before marking
+  (relay exited 1 at the injected crash point, as designed)
 relayed tale.published for tale tale-1
 consumer: consumer applied=1 duplicatesSkipped=1
 PASS: duplicate delivery skipped by idempotency ledger
@@ -27,8 +29,8 @@ PASS: dashboard correct despite duplicate; effect applied exactly once (applied_
 
 === PHASE D: two concurrent consumers, 50 events - lock-wait, no crash, exactly-once ===
 seeded 50 events
-consumer applied=50 duplicatesSkipped=0
 consumer applied=0 duplicatesSkipped=50
+consumer applied=50 duplicatesSkipped=0
 PASS: concurrent consumers: both exited 0 (busy_timeout, no lock crash), 50 events applied exactly once, 50 duplicate attempts skipped cleanly
 
 ALL PHASES PASS

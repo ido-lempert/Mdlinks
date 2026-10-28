@@ -21,7 +21,8 @@ echo "$R" | grep -q '"dbStatus":"published","dashboardStatus":null' \
 
 echo; echo "=== PHASE B: outbox, API crashes AFTER commit; relay drains later ==="
 rm -f $DB $DB-wal $DB-shm; seed
-$TSX src/api-outbox.ts $DB tale-1 --crash-after-commit
+$TSX src/api-outbox.ts $DB tale-1 --crash-after-commit; BC=$?
+[ $BC -eq 1 ] && echo "  (API exited 1 at the injected crash point, as designed)" || fail "API crash exit code was $BC, expected 1"
 R=$($TSX src/verify.ts $DB tale-1); echo "after API crash: $R"
 echo "$R" | grep -q '"outboxPending":1' && pass "outbox row survived the crash, pending relay" || fail "outbox row missing after crash"
 $TSX src/relay.ts $DB
@@ -33,7 +34,8 @@ echo "$R" | grep -q '"dbStatus":"published","dashboardStatus":"published","appli
 echo; echo "=== PHASE C: relay dies mid-publish; duplicate delivered; consumer dedupes ==="
 rm -f $DB $DB-wal $DB-shm; seed
 $TSX src/api-outbox.ts $DB tale-1 >/dev/null
-$TSX src/relay.ts $DB --die-mid-publish
+$TSX src/relay.ts $DB --die-mid-publish; RC=$?
+[ $RC -eq 1 ] && echo "  (relay exited 1 at the injected crash point, as designed)" || fail "relay crash exit code was $RC, expected 1"
 $TSX src/relay.ts $DB            # relay retries the same outbox row -> duplicate event in queue
 C=$($TSX src/consumer.ts $DB); echo "consumer: $C"
 echo "$C" | grep -q 'duplicatesSkipped=1' && pass "duplicate delivery skipped by idempotency ledger" || fail "duplicate not skipped"
