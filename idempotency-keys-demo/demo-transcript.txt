@@ -1,0 +1,22 @@
+--- Scenario 1: naive endpoint, response lost in flight ---
+client: POST /api/naive/claim {user:"dana"} ... server commits, response lost (simulated)
+client: no answer after timeout -> RETRY the same intent
+ledger now holds 2 claims for dana: [{"id":1,"user":"dana","coupon":"FLASH50","at":1793203594124},{"id":2,"user":"dana","coupon":"FLASH50","at":1793203595224}]
+>> one click, two coupons. The retry was blind.
+
+--- Scenario 2: same failure, idempotent endpoint ---
+client: POST /api/idempotent/claim {user:"dana"} Idempotency-Key: 74e48f37-145e-44e2-92ea-f5b718d2556b ... response lost again
+client: timeout -> RETRY with the SAME key
+server answered: {"claim":{"id":1,"user":"dana","coupon":"FLASH50","at":1793203596148},"replayed":true}
+ledger holds 1 claim(s): [{"id":1,"user":"dana","coupon":"FLASH50","at":1793203596148}]
+>> the stored result was replayed; no second claim.
+
+--- Scenario 3: double-click while the first request is still processing ---
+second click got: {"error":"request with this key is still processing - retry shortly","key":"5621eae4-4b41-49e1-aa11-24aaf397e29e"}
+first click got:  {"claim":{"id":1,"user":"eli","coupon":"FLASH50","at":1793203597258}}
+ledger holds 1 claim(s).
+>> concurrent duplicate is told to wait, not given a second claim.
+
+--- Scenario 4: same key, different payload ---
+status 422: {"error":"same key, different payload - rejected","key":"cb9838d5-e0bb-45da-84b3-94b630b511fe"}
+>> a key is bound to its payload; reuse with a different body is rejected.
