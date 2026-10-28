@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stream link POC - upload, share a link, stream-assemble</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <h1>Upload once, stream anywhere</h1>
+  <p class="sub">Upload a file, get a link to the start of its byte stream. Paste the link below - the browser builds the file chunk by chunk as bytes arrive, straight to disk where supported, so the client never holds the whole file in memory.</p>
+
+  <section>
+    <h2>1. Upload</h2>
+    <input type="file" id="fileInput">
+    <button id="uploadBtn">Upload and get stream link</button>
+    <button id="demoBtn" title="Creates a deterministic 50MB demo file on the server">Use the 50MB demo instead</button>
+    <div class="bar"><div id="upFill"></div></div>
+    <div id="upStatus" class="status"></div>
+    <div id="linkRow" class="hidden">
+      <label>Stream link (the start of the chain):</label>
+      <input type="text" id="linkOut" readonly>
+      <button id="copyBtn">Copy</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Stream and assemble</h2>
+    <input type="text" id="linkIn" placeholder="Paste a stream link here, e.g. /stream/ab12cd34ef56/demo-content-50mb.txt">
+    <label class="check"><input type="checkbox" id="diskMode"> Stream straight to disk (File System Access API, no RAM copy) where supported</label>
+    <button id="startBtn">Start streaming</button>
+    <div class="bar"><div id="dlFill"></div></div>
+    <div id="dlStatus" class="status"></div>
+    <canvas id="spark" width="560" height="60"></canvas>
+  </section>
+
+  <footer>POC - local only. Chunks are assembled in order via fetch + ReadableStream; Range requests are supported by the server.</footer>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

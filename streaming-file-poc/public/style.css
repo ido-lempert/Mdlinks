@@ -1,0 +1,20 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #0f1420; color: #e8ecf4; }
+main { max-width: 640px; margin: 48px auto; padding: 0 20px; }
+h1 { font-size: 28px; margin-bottom: 4px; }
+.sub { color: #9aa7bd; margin-top: 0; }
+section { background: #171e30; border: 1px solid #28324c; border-radius: 12px; padding: 20px; margin: 20px 0; }
+h2 { font-size: 16px; color: #7fd4ff; margin-top: 0; }
+input[type=text] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #3a4763; background: #0f1420; color: #e8ecf4; margin: 8px 0; font-family: ui-monospace, monospace; font-size: 12px; }
+button { background: #2f7cf6; color: #fff; border: 0; border-radius: 8px; padding: 10px 14px; margin: 6px 6px 6px 0; cursor: pointer; font-size: 14px; }
+button:hover { background: #4a8df8; }
+#demoBtn { background: #2c3a58; }
+.bar { height: 10px; background: #0f1420; border-radius: 6px; overflow: hidden; margin: 10px 0 4px; }
+.bar > div { height: 100%; width: 0%; background: linear-gradient(90deg, #2f7cf6, #41e0a3); transition: width .15s; }
+.status { font-family: ui-monospace, monospace; font-size: 12px; color: #9fe8c5; min-height: 16px; }
+.hidden { display: none; }
+#linkRow { margin-top: 10px; }
+#linkRow label { font-size: 13px; color: #9aa7bd; }
+.check { display: block; font-size: 13px; color: #9aa7bd; margin: 6px 0; }
+#spark { width: 100%; margin-top: 10px; background: #0f1420; border-radius: 8px; }
+footer { color: #5f6c88; font-size: 12px; margin-top: 24px; }
