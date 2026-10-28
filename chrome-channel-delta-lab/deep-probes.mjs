@@ -71,5 +71,6 @@ for (const [name, opts] of BROWSERS) {
   await b.close();
   console.log(name, 'done');
 }
+fs.mkdirSync('research', { recursive: true });
 fs.writeFileSync(`research/deep-${Date.now()}.json`, JSON.stringify(results, null, 2));
 console.log(JSON.stringify(results, null, 2));

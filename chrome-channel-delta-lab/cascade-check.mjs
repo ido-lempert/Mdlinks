@@ -31,5 +31,6 @@ const out = await page.evaluate(() => {
   return { namedAfterUniversal: bg, namedBeforeUniversal: bg2, version: navigator.userAgent.match(/Chrome\/[\d.]+/)?.[0] };
 });
 await b.close();
+fs.mkdirSync('research', { recursive: true });
 fs.writeFileSync(`research/cascade-${Date.now()}.json`, JSON.stringify(out, null, 2));
 console.log(JSON.stringify(out, null, 2));

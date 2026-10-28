@@ -40,5 +40,6 @@ for (const [name, opts] of [
   })) };
   await b.close();
 }
+fs.mkdirSync('research', { recursive: true });
 fs.writeFileSync(`research/errcheck-${Date.now()}.json`, JSON.stringify(out, null, 2));
 console.log(JSON.stringify(out, null, 2));

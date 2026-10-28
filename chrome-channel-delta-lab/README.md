@@ -44,10 +44,36 @@ here are the runtime.
 - `npm run cascade` - verifies the `::highlight(*)` cascade in both
   source orders on canary 158 (results-cascade.json).
 
-Raw outputs: results-round1.json (five builds incl. the Playwright
-bundled-chromium control), results-deep.json, results-errcheck.json,
-results-cascade.json. Independent-rerun outputs and live chromestatus
-snapshots from the review pass are under senior-evidence/.
+Raw outputs from the author's runs: results-round1.json (five builds
+incl. the Playwright bundled-chromium control), results-deep.json,
+results-errcheck.json, results-cascade.json.
+
+Provenance: results-*.json are the author's measurements. senior-evidence/
+is NOT author output - it archives an independent reviewer's rerun logs
+(rerun-*.log) and their own chromestatus captures (cs-*.json.clean), kept
+separate so the two sources are never conflated. Two of the author's
+scripts are deliberately separate tests: errcheck.mjs captures the
+verbatim exception contract (negative path), and draw-element2.mjs is the
+positive render control (pixel-verified).
+
+## Setup from a fresh clone
+
+```sh
+npm ci                          # playwright 1.64.1 (pinned in package-lock)
+npx playwright install chromium # bundled control row
+
+# Chrome for Testing rows (official feed; pick the versions above):
+for v in 157.0.8103.15 158.0.8117.2 158.0.8127.2; do
+  curl -LO "https://storage.googleapis.com/chrome-for-testing-public/$v/linux64/chrome-linux64.zip"
+  mkdir -p "browsers/$v" && unzip -q chrome-linux64.zip -d "browsers/$v"
+done
+
+# Stable row needs a system Chrome: /usr/bin/google-chrome (channel: 'chrome').
+```
+
+The scripts create their `research/` output directory themselves; each run
+writes a timestamped JSON there. The committed results-*.json at the top
+level are the author's October 28, 2026 runs.
 
 ## Headline findings (Oct 28, 2026)
 
@@ -57,13 +83,18 @@ snapshots from the review pass are under senior-evidence/.
 | HTML-in-canvas `drawElementImage` | absent | present, renders | present, renders |
 | LoAF `styleDuration`/`layoutDuration` + script `forcedStyleDuration` | absent | absent (see note) | present |
 | `::highlight(*)` universal selector | rule dropped | rule dropped | parses, cascade verified |
-| SVG textPath `side="right"` | ignored | ignored | mirrors layout |
+| SVG textPath `side="right"` | ignored | ignored | reverses text direction along the path |
 
-Note: chromestatus.com lists the LoAF fields as "Enabled by default" in
-milestone 157, but build 157.0.8103.15 does not emit them under workload;
-they first appear in the 158 builds. The reason (later 157 build,
-off-by-one listing, staged rollout) is not asserted - only the runtime
-evidence is.
+Columns are prerelease builds (beta / dev / canary); presence there is
+not a stable-shipping claim.
+
+Note: the chromestatus M157 roadmap groups the LoAF fields under its
+"Enabled by default" bucket (the planned shipping mode for the milestone),
+while the feature's own detail page still reads Proposed, unreleased, with
+a future-tense rollout plan. Build 157.0.8103.15 does not emit the fields
+under workload; they first appear in the 158 builds. A later 157 build may
+still ship them. The reason (later 157 build, off-by-one listing, staged
+rollout) is not asserted - only the runtime evidence is.
 
 Two-value `text-overflow` (`"L" "R"`) is NOT supported in any tested
 build; only the single-string form shipped.

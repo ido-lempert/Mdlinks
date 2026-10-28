@@ -113,5 +113,6 @@ for (const [name, opts] of BROWSERS) {
   await browser.close();
   console.log(name, version, 'done');
 }
+fs.mkdirSync('research', { recursive: true });
 fs.writeFileSync(`research/results-${Date.now()}.json`, JSON.stringify(results, null, 2));
 console.log(JSON.stringify(results, null, 2));
