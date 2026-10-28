@@ -1,26 +1,34 @@
 === PHASE A: naive dual-write, crash between DB commit and queue publish ===
 seeded tale-1 as draft
 CRASH: process died after DB commit, before queue publish
-state: {"dbStatus":"published","dashboardStatus":null,"outboxPending":0}
+PASS: naive process really crashed (exit code 1)
+PASS: queue empty after crash: the event was never published
+state: {"dbStatus":"published","dashboardStatus":null,"appliedCount":null,"outboxPending":0}
 PASS: divergence reproduced: DB says published, dashboard never heard about it
 
 === PHASE B: outbox, API crashes AFTER commit; relay drains later ===
 seeded tale-1 as draft
 CRASH: process died right after commit; outbox row is safe
-after API crash: {"dbStatus":"published","dashboardStatus":null,"outboxPending":1}
+after API crash: {"dbStatus":"published","dashboardStatus":null,"appliedCount":null,"outboxPending":1}
 PASS: outbox row survived the crash, pending relay
 relayed tale.published for tale tale-1
 consumer applied=1 duplicatesSkipped=0
-after relay+consumer: {"dbStatus":"published","dashboardStatus":"published","outboxPending":0}
+after relay+consumer: {"dbStatus":"published","dashboardStatus":"published","appliedCount":1,"outboxPending":0}
 PASS: system converged without any data loss
 
 === PHASE C: relay dies mid-publish; duplicate delivered; consumer dedupes ===
 seeded tale-1 as draft
-CRASH: relay died after queueing 95765623-a3f6-4cf6-a11e-e96e87b34f27, before marking
+CRASH: relay died after queueing 99bd3935-d3ee-4b5c-a77f-c5fb5447103f, before marking
 relayed tale.published for tale tale-1
 consumer: consumer applied=1 duplicatesSkipped=1
 PASS: duplicate delivery skipped by idempotency ledger
-final: {"dbStatus":"published","dashboardStatus":"published","outboxPending":0}
-PASS: dashboard correct despite duplicate
+final: {"dbStatus":"published","dashboardStatus":"published","appliedCount":1,"outboxPending":0}
+PASS: dashboard correct despite duplicate; effect applied exactly once (applied_count=1, a non-idempotent counter would read 2 without the ledger)
+
+=== PHASE D: two concurrent consumers, 50 events - lock-wait, no crash, exactly-once ===
+seeded 50 events
+consumer applied=50 duplicatesSkipped=0
+consumer applied=0 duplicatesSkipped=50
+PASS: concurrent consumers: both exited 0 (busy_timeout, no lock crash), 50 events applied exactly once, 50 duplicate attempts skipped cleanly
 
 ALL PHASES PASS

@@ -4,6 +4,7 @@ export function openDb(path: string): DatabaseSync {
   const db = new DatabaseSync(path);
   db.exec(`
     PRAGMA journal_mode = WAL;
+    PRAGMA busy_timeout = 5000;
     CREATE TABLE IF NOT EXISTS tales(
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
@@ -28,7 +29,8 @@ export function openDb(path: string): DatabaseSync {
     );
     CREATE TABLE IF NOT EXISTS dashboard(     -- what the dashboard currently shows
       tale_id TEXT PRIMARY KEY,
-      status TEXT NOT NULL
+      status TEXT NOT NULL,
+      applied_count INTEGER NOT NULL DEFAULT 0
     );
   `);
   return db;
